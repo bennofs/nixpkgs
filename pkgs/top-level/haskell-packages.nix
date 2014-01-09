@@ -2587,6 +2587,8 @@ let result = let callPackage = x : y : modifyPrio (newScope result.finalReturn x
   uuagcCabal = callPackage ../development/tools/haskell/uuagc/cabal.nix {};
   uuagc = callPackage ../development/tools/haskell/uuagc {};
 
+  tkyprof = callPackage ../development/tools/haskell/tkyprof {};
+
   # Applications.
 
   arbtt = callPackage ../applications/misc/arbtt {};
