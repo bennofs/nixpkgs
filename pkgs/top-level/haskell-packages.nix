@@ -1983,6 +1983,8 @@ let result = let callPackage = x : y : modifyPrio (newScope result.finalReturn x
 
   RSA = callPackage ../development/libraries/haskell/RSA {};
 
+  rss = callPackage ../development/libraries/haskell/rss {};
+
   sampleFrame = callPackage ../development/libraries/haskell/sample-frame {};
 
   safe = callPackage ../development/libraries/haskell/safe {};
@@ -2034,6 +2036,8 @@ let result = let callPackage = x : y : modifyPrio (newScope result.finalReturn x
   snapLoaderStatic = callPackage ../development/libraries/haskell/snap/loader-static.nix {};
 
   snapServer = callPackage ../development/libraries/haskell/snap/server.nix {};
+
+  snowball = callPackage ../development/libraries/haskell/snowball {};
 
   socks = callPackage ../development/libraries/haskell/socks {};
 
@@ -2254,6 +2258,8 @@ let result = let callPackage = x : y : modifyPrio (newScope result.finalReturn x
   tls = callPackage ../development/libraries/haskell/tls {};
 
   tlsExtra = callPackage ../development/libraries/haskell/tls-extra {};
+
+  tokenize = callPackage ../development/libraries/haskell/tokenize {};
 
   transformers_0_2_2_0 = callPackage ../development/libraries/haskell/transformers/0.2.2.0.nix {};
   transformers_0_3_0_0 = if (pkgs.stdenv.lib.versionOlder ghc.version "7.7") then
@@ -2671,6 +2677,10 @@ let result = let callPackage = x : y : modifyPrio (newScope result.finalReturn x
   LambdaHack = callPackage ../games/LambdaHack {};
 
   MazesOfMonad = callPackage ../games/MazesOfMonad {};
+
+  # Servers.
+ 
+  hackageServer = callPackage ../servers/hackage-server {};
 
 # End of the main part of the file.
 
