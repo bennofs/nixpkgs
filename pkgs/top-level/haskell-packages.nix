@@ -2074,6 +2074,8 @@ let result = let callPackage = x : y : modifyPrio (newScope result.finalReturn x
 
   RSA = callPackage ../development/libraries/haskell/RSA {};
 
+  rss = callPackage ../development/libraries/haskell/rss {};
+
   sampleFrame = callPackage ../development/libraries/haskell/sample-frame {};
 
   safe = callPackage ../development/libraries/haskell/safe {};
