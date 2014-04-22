@@ -8618,6 +8618,10 @@ let
     bison = bison2;
   };
 
+  lltag = callPackage ../applications/audio/lltag {
+    inherit (perlPackages) LWP;
+  };
+
   lmms = callPackage ../applications/audio/lmms { };
 
   lxdvdrip = callPackage ../applications/video/lxdvdrip { };
