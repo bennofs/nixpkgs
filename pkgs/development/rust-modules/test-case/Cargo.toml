@@ -1,0 +1,7 @@
+[package]
+name = "test-case"
+version = "0.1.0"
+authors = ["Benno Fünfstück <benno.fuenfstueck@gmail.com>"]
+
+[dependencies]
+hello_rusty_worlds = "0.1.0"

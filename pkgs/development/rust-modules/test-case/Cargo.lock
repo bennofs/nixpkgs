@@ -1,0 +1,12 @@
+[root]
+name = "test-case"
+version = "0.1.0"
+dependencies = [
+ "hello_rusty_worlds 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "hello_rusty_worlds"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
