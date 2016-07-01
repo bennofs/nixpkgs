@@ -29,7 +29,6 @@ let
     inherit git;
     inherit (stdenv) lib;
   };
-  buildCache = import ./build-cache.nix { inherit (stdenv) lib; };
   linkDeps = import ./link-deps.nix { inherit (stdenv) lib; };
   rustInputs = rustDepends ++ devRustDepends;
 in
