@@ -2224,6 +2224,8 @@ in {
 
   django_environ = callPackage ../development/python-modules/django_environ { };
 
+  django-etesync-journal = callPackage ../development/python-modules/django-etesync-journal { };
+
   django_evolution = callPackage ../development/python-modules/django_evolution { };
 
   django_extensions = callPackage ../development/python-modules/django-extensions { };
