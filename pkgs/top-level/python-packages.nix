@@ -2279,6 +2279,8 @@ in {
 
   djangorestframework = callPackage ../development/python-modules/djangorestframework { };
 
+  drf-nested-routers = callPackage ../development/python-modules/drf-nested-routers { };
+
   django-raster = callPackage ../development/python-modules/django-raster { };
 
   django_redis = callPackage ../development/python-modules/django_redis { };
