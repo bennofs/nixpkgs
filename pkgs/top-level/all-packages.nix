@@ -13561,6 +13561,8 @@ in
 
   etcd = callPackage ../servers/etcd { };
 
+  etesync-server = callPackage ../servers/etesync { };
+
   ejabberd = callPackage ../servers/xmpp/ejabberd { };
 
   exhibitor = callPackage ../servers/exhibitor { };
