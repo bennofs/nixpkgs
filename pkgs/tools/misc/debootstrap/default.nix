@@ -1,5 +1,5 @@
 { lib, stdenv, fetchurl, dpkg, gawk, perl, wget, coreutils, util-linux
-, gnugrep, gnutar, gnused, gzip, makeWrapper }:
+, gnugrep, gnutar, gnused, gzip, makeWrapper, bash }:
 # USAGE like this: debootstrap sid /tmp/target-chroot-directory
 # There is also cdebootstrap now. Is that easier to maintain?
 let binPath = stdenv.lib.makeBinPath [
@@ -12,6 +12,8 @@ let binPath = stdenv.lib.makeBinPath [
     gzip
     perl
     wget
+    util-linux
+    bash
   ];
 in stdenv.mkDerivation rec {
   pname = "debootstrap";
@@ -27,25 +29,30 @@ in stdenv.mkDerivation rec {
   nativeBuildInputs = [ makeWrapper ];
 
   dontBuild = true;
+  # the script is copied to the target chroot when using --foreign
+  # since the target does not contain nix, we must avoid references to nx paths in the script
+  dontPatchShebangs = true; 
+
+  patches = [
+     # fix hardcoded paths and permission issues 
+    ./nix-patch.patch
+  ];
 
   installPhase = ''
     runHook preInstall
 
+    # NOTE: don't hardcode any absolute paths into the Nix store (see comment for dontPatchShebangs)
+    # we can rely on PATH since we build a wrapper anyway
     substituteInPlace debootstrap \
-      --replace 'CHROOT_CMD="chroot '  'CHROOT_CMD="${coreutils}/bin/chroot ' \
-      --replace 'CHROOT_CMD="unshare ' 'CHROOT_CMD="${util-linux}/bin/unshare ' \
-      --replace /usr/bin/dpkg ${dpkg}/bin/dpkg \
-      --replace '#!/bin/sh' '#!/bin/bash' \
       --subst-var-by VERSION ${version}
 
     d=$out/share/debootstrap
     mkdir -p $out/{share/debootstrap,bin}
 
-    mv debootstrap $out/bin
-
     cp -r . $d
 
-    wrapProgram $out/bin/debootstrap \
+    # use makeWrapper and don't set argv0 so that $0 points to the unpatched script
+    makeWrapper $out/share/debootstrap/debootstrap $out/bin/debootstrap \
       --set PATH ${binPath} \
       --set-default DEBOOTSTRAP_DIR $d
 

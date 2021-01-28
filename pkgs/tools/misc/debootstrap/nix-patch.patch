@@ -1,0 +1,35 @@
+diff --git a/debootstrap b/debootstrap
+index 8fbf954..cb7075b 100755
+--- a/debootstrap
++++ b/debootstrap
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/usr/bin/env sh
+ set -e
+ 
+ VERSION='@VERSION@'
+@@ -518,7 +518,7 @@ fi
+ 
+ if in_path dpkg && \
+      dpkg --print-architecture >/dev/null 2>&1; then
+-	HOST_ARCH=$(/usr/bin/dpkg --print-architecture)
++	HOST_ARCH=$(dpkg --print-architecture)
+ elif in_path udpkg && \
+      udpkg --print-architecture >/dev/null 2>&1; then
+ 	HOST_ARCH=$(/usr/bin/udpkg --print-architecture)
+@@ -757,6 +757,7 @@ if am_doing_phase save_variables; then
+ 	echo "$base"			>"$TARGET/debootstrap/base"
+ 
+ 	chmod 755 "$TARGET/debootstrap/debootstrap"
++	chmod 644 "$TARGET/debootstrap/"{functions,suite-script,*-common}
+ fi
+ 
+ if am_doing_phase maketarball; then
+@@ -795,6 +796,7 @@ if am_doing_phase first_stage; then
+ 		echo "$base"			>"$TARGET/debootstrap/base"
+ 
+ 		chmod 755 "$TARGET/debootstrap/debootstrap"
++		chmod 644 "$TARGET/debootstrap/"{functions,suite-script,*-common}
+ 	fi
+ 
+ 	# create sources.list
